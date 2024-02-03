@@ -1,7 +1,11 @@
 const express = require("express");
 require("dotenv").config();
+const authRoutes = require("./routes/auth");
 // Connect Server
 const app = express();
+
+// Parse JSON
+app.use(express.json());
 
 // connect DB
 const mongoose = require("mongoose");
@@ -23,7 +27,9 @@ app.get("/health", (req, res) => {
   });
 });
 
-const PORT = 3000;
+app.use("/api/v1/auth", authRoutes);
+
+const PORT = process.env.PORT;
 app.listen(PORT, (err) => {
   if (!err) {
     console.log(`Server is started at the port ${PORT}`);
