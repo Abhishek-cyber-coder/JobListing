@@ -1,6 +1,8 @@
 const express = require("express");
 require("dotenv").config();
 const authRoutes = require("./routes/auth");
+const jobRoutes = require("./routes/job");
+
 // Connect Server
 const app = express();
 
@@ -28,6 +30,8 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/api/v1/auth", authRoutes);
+
+app.use("/api/v1/job", jobRoutes);
 
 const PORT = process.env.PORT;
 app.listen(PORT, (err) => {
